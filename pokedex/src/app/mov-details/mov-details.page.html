@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Description</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Imprimiendo los contenidos obtenidos del API-->
+<ion-content>
+  <div *ngIf="details">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-capitalize">{{ details.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-item *ngFor="let e of details.effect_entries | slice:0:1;">
+        <ion-label class="ion-text-wrap">{{ e.effect }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <b>Type:</b>
+        <ion-chip color="primary" class="ion-text-capitalize">
+          <ion-label>
+            {{ details.type.name }}
+          </ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <b>Move Class</b>
+        <ion-label class="ion-text-capitalize">
+          : {{ details.damage_class.name }}
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="details.power != null">
+        <b>Power</b>
+        <ion-label>: {{ details.power }}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="details.accuracy != null">
+        <b>Accuracy</b>
+        <ion-label>: {{ details.accuracy }}%</ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

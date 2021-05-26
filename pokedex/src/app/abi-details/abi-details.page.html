@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Description</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Imprimiendo los contenidos obtenidos del API-->
+<ion-content>
+  <div *ngIf="details">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-capitalize">{{ details.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-item *ngFor="let e of details.effect_entries | slice:1:2;">
+        <ion-label class="ion-text-wrap">{{ e.effect }}</ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{ details?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  
+  <div *ngIf="details">
+    <!--Se muestran las imagenes del pokemon-->
+    <ion-slides pager="true">
+      <ion-slide *ngFor="let sprite of details.images">
+        <img [src]="sprite" style="height: 250px;">
+      </ion-slide>
+    </ion-slides>
+ 
+    <ion-card>
+      <!--Se muestra el nombre, el tipo y el peso del pokemon-->
+      <ion-card-header>
+        <ion-card-title class="ion-text-capitalize">#{{ details.id }} {{ details.name }}
+          <ion-chip color="primary" *ngFor="let t of details.types">
+            <ion-label>{{ t.type.name }}</ion-label>
+          </ion-chip>
+        </ion-card-title>
+        <ion-card-subtitle class="ion-text-capitalize">{{ details.weight }} lbs</ion-card-subtitle>
+      </ion-card-header>
+ 
+      <!--Se muestra toda la información importante del pokemon: habilidades, estadísticas y movimientos-->
+      <ion-card-content>
+        <ion-list lines="full">
+          <b>Abilities:</b>
+          <ion-item *ngFor="let a of details.abilities" class="ion-text-capitalize" [routerLink]=a.ability.url>
+            {{ a.ability.name }}
+          </ion-item>
+          <b>Base Stats:</b>
+          <ion-item *ngFor="let s of details.stats" class="ion-text-capitalize">
+            <ion-label slot="start"><b>{{ s.stat.name }}:</b></ion-label>
+            <ion-label slot="end">
+              {{ s.base_stat }}
+            </ion-label>
+          </ion-item>
+          <b>Moveset:</b>
+          <ion-item *ngFor="let m of details.moves" class="ion-text-capitalize" [routerLink]=m.move.url>
+            <ion-label>
+              <b>{{ m.move.name }}</b>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+ 
+</ion-content>
