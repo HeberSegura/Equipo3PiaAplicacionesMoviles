@@ -3,13 +3,17 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'home/:index',
@@ -22,7 +26,7 @@ const routes: Routes = [
   {
     path: 'home/:index/https:/pokeapi.co/api/v2/move/:mov',
     loadChildren: () => import('./mov-details/mov-details.module').then( m => m.MovDetailsPageModule)
-  }
+  },
 ];
 
 @NgModule({
