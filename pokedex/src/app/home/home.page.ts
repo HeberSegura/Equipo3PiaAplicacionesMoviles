@@ -1,6 +1,8 @@
 import { PokemonService } from './../services/pokemon.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
  
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomePage implements OnInit {
  
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
  
-  constructor(private pokeService: PokemonService) { }
+  constructor(private pokeService: PokemonService, private camera: Camera) { }
  
   ngOnInit()  {
     this.loadPokemon();
@@ -48,6 +50,20 @@ export class HomePage implements OnInit {
       this.pokemon = [res];
     }, err => {
       this.pokemon = [];
+    });
+  }
+
+  takePicture(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
     });
   }
 

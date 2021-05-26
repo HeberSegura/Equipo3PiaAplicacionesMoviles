@@ -7,6 +7,7 @@
 </ion-header>
  
 <ion-content>
+  <ion-icon name="camera" (click)="takePicture()"></ion-icon>
   <!--La barra de búsqueda-->
   <ion-searchbar placeholder="Search Pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar>
   <ion-list *ngIf="pokemon.length == 0">
